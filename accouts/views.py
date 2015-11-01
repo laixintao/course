@@ -27,7 +27,9 @@ def login(request):
                 auth.login(request,user)
                 return render_to_response('index.html',RequestContext(request))
             else:
-                return render_to_response('login.html',RequestContext(request,{'form':form,'password_is_wrong':True}))
+                return render_to_response('login.html',RequestContext(request,
+                                                                      {'form':form,
+                                                                       'password_is_wrong':True}))
         else:
             return render_to_response('login.html',RequestContext(request,{'form':form,}))
 

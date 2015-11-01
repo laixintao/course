@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>课程答疑预约系统</title>
+    <title>发布课程 - 课程答疑预约系统</title>
     <meta name="description" content="">
     {% bootstrap_stylesheet_tag %}
     {% bootstrap_stylesheet_tag "responsive" %}
@@ -23,21 +23,14 @@
 
 <body>
     <div class="well">
-        <h1>课程答疑预约系统</h1>
+        <h1>发布课程</h1>
         <p></p>
-        {% if password_is_wrong %}
-        <div class="alert alert-error">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            <h4>错误!</h4>用户名或密码错误
-        </div>
-    {% endif %}
         <form class="form-horizontal" action="" method="post">
             {% csrf_token %}
             {{ form|as_bootstrap:"horizontal" }}
             <p class="form-actions">
-                <input type="submit" value="登录" class="btn btn-primary">
-                <a href="/contactme/"><input type="button" value="忘记密码" class="btn btn-danger"></a>
-                <a href="/contactme/"><input type="button" value="新员工？" class="btn btn-success"></a>
+                <input type="submit" value="发布" class="btn btn-primary">
+                <input type="reset" value="清空" class="btn btn-danger">
             </p>
         </form>
     </div>
