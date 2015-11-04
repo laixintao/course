@@ -6,7 +6,9 @@ from forms import courseForm
 from django.http import HttpResponse
 from models import QAtime
 import time
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def publish(request):
     if request.method == 'GET':
         form = courseForm()
