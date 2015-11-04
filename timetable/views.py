@@ -6,6 +6,7 @@ from forms import courseForm
 from django.http import HttpResponse
 from models import QAtime
 import time
+from django.utils import six,timezone
 from django.contrib.auth.decorators import login_required
 
 @login_required
@@ -28,7 +29,7 @@ def publish(request):
             new_time_table.time = time
             new_time_table.max_people = max_people
             new_time_table.room = room
-            localtime = time.strftime('%Y-%m-%d %H:%M:%S')
+            localtime = timezone.now()
             new_time_table.pubTime = localtime
             new_time_table.save()
             return HttpResponse(str(course_name)+'\n'+

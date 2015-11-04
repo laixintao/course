@@ -51,5 +51,6 @@ def register(request):
             new_psw = form.cleaned_data['password']
             user = User.objects.create_user(username=new_name,
                                             password=new_psw)
+            user.groups = [1,] #默认是Student学生分组
             user.save()
             return render_to_response('register_success.html')
