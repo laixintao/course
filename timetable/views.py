@@ -37,3 +37,6 @@ def publish(request):
                                 str(max_people))
         else:
             return render_to_response('publish.html',RequestContext(request,{'form':form,}))
+
+def index(request):
+    return render_to_response('index.html')

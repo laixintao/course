@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>登录 - 课程答疑预约系统</title>
+    <title>注册 - 课程答疑预约系统</title>
     <meta name="description" content="">
     {% bootstrap_stylesheet_tag %}
     {% bootstrap_stylesheet_tag "responsive" %}
@@ -35,9 +35,9 @@
             {% csrf_token %}
             {{ form|as_bootstrap:"horizontal" }}
             <p class="form-actions">
-                <input type="submit" value="登录" class="btn btn-primary">
-                <a href="/contactme/"><input type="button" value="忘记密码" class="btn btn-danger"></a>
-                <a href="/register/"><input type="button" value="新用户？" class="btn btn-success"></a>
+                <input type="submit" value="提交" class="btn btn-primary">
+                <input type="reset" value="清空" class="btn btn-danger">
+                <a href="/login/"><input type="button" value="已有帐号？" class="btn btn-success"></a>
             </p>
         </form>
     </div>

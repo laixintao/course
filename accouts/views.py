@@ -11,7 +11,9 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from bootstrap_toolkit.widgets import BootstrapUneditableInput
 from django.contrib.auth.decorators import login_required
 
-from forms import LoginForm
+from forms import LoginForm,RegisterForm
+
+from django.contrib.auth.models import User
 
 def login(request):
     if request.method == 'GET':
@@ -37,3 +39,17 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect("/accounts/login/")
+
+def register(request):
+    if request.method == 'GET':
+        form = RegisterForm
+        return render_to_response('register.html',RequestContext(request,{'form':form,}))
+    else:
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            new_name = form.cleaned_data['username']
+            new_psw = form.cleaned_data['password']
+            user = User.objects.create_user(username=new_name,
+                                            password=new_psw)
+            user.save()
+            return render_to_response('register_success.html')
