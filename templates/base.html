@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% load bootstrap_toolkit %}
+{% load url from future %}
+<html lang="ch">
+<head>
+    <meta charset="utf-8">
+    <title>{%block headname%}首页{%endblock%} - 课程答疑预约系统</title>
+    <meta name="description" content="">
+    {% bootstrap_stylesheet_tag %}
+    {% bootstrap_stylesheet_tag "responsive" %}
+    <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.JS"></script>
+    <![endif]-->
+    <!--    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>-->
+    {% bootstrap_javascript_tag %}
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body>
+    {%block content%}
+    {%endblock%}
+
+</body>
+</html>
