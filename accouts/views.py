@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from django.shortcuts import render_to_response,render,get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect 
-from django.contrib.auth.models import User 
+from django.shortcuts import render,get_object_or_404
+from utils import course_render
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import auth
 from django.contrib import messages
 from django.template.context import RequestContext 
@@ -20,7 +20,7 @@ from django.contrib.auth.models import User
 def login(request):
     if request.method == 'GET':
         form = LoginForm()
-        return render_to_response('login.html',RequestContext(request,{'form':form,}))
+        return course_render(request,'login.html',RequestContext(request,{'form':form,}))
     else:
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -29,13 +29,13 @@ def login(request):
             user = auth.authenticate(username=username,password=password)
             if user is not None and user.is_active:
                 auth.login(request,user)
-                return render_to_response('index.html',RequestContext(request))
+                return course_render(request,'index.html',RequestContext(request))
             else:
-                return render_to_response('login.html',RequestContext(request,
+                return course_render(request,'login.html',RequestContext(request,
                                                                       {'form':form,
                                                                        'password_is_wrong':True}))
         else:
-            return render_to_response('login.html',RequestContext(request,{'form':form,}))
+            return course_render(request,'login.html',RequestContext(request,{'form':form,}))
 
 @login_required
 def logout(request):
@@ -45,7 +45,7 @@ def logout(request):
 def register(request):
     if request.method == 'GET':
         form = RegisterForm
-        return render_to_response('register.html',RequestContext(request,{'form':form,}))
+        return course_render(request,'register.html',RequestContext(request,{'form':form,}))
     else:
         form = RegisterForm(request.POST)
         if form.is_valid():
@@ -55,4 +55,4 @@ def register(request):
                                             password=new_psw)
             user.groups = [1,] #默认是Student学生分组
             user.save()
-            return render_to_response('register_success.html')
+            return course_render(request,'register_success.html')

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from django.shortcuts import render_to_response,render,get_object_or_404
+from django.shortcuts import render,get_object_or_404
+from accouts.utils import course_render
 from django.template.context import RequestContext
 from forms import courseForm
 from django.http import HttpResponse
@@ -13,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 def publish(request):
     if request.method == 'GET':
         form = courseForm()
-        return render_to_response('publish.html',RequestContext(
+        return course_render(request,'publish.html',RequestContext(
             request,
             {'form':form,}
         ))
@@ -37,20 +38,19 @@ def publish(request):
                                 str(room)+'\n'+
                                 str(max_people))
         else:
-            return render_to_response('publish.html',RequestContext(request,{'form':form,}))
+            return course_render(request,'publish.html',RequestContext(request,{'form':form,}))
 
 def index(request):
-    return render_to_response('index.html')
+    return course_render(request,'index.html')
 
 def all_timetables(request):
     timetables = QAtime.objects.all()
-    # print timetables
-    return render_to_response('all-timetables.html',{
+    return course_render(request,'all-timetables.html',{
         'timetables':timetables,
     })
 
 def help(request):
-    return render_to_response('help.html')
+    return course_render(request,'help.html')
 
 def mytime(request):
-    return render_to_response('mytime.html')
+    return course_render(request,'mytime.html')
