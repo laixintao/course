@@ -15,14 +15,22 @@
 {%block content%}
 
 <table class="table table-striped">
-    <tr>
+    <tr class="success">
+        <td>ID</td>
         <td>时间</td>
         <td>课程名称</td>
+        <td>任课教师</td>
+        <td>地点</td>
+        <td>预约人数</td>
     </tr>
     {% for timetable in timetables %}
     <tr>
+        <td>{{timetable.id}}</td>
         <td>{{timetable.time}}</td>
         <td>{{timetable.courseName}}</td>
+        <td>{{timetable.teacher}}</td>
+        <td>{{timetable.room}}</td>
+        <td>{{timetable.max_people}}</td>
     </tr>
     {% endfor %}
 </table>

@@ -44,7 +44,7 @@ def index(request):
 
 def all_timetables(request):
     timetables = QAtime.objects.all()
-    print timetables
+    # print timetables
     return render_to_response('all-timetables.html',{
         'timetables':timetables,
     })
