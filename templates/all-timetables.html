@@ -4,14 +4,27 @@
 {% bootstrap_stylesheet_tag %}
 {% bootstrap_stylesheet_tag "responsive" %}
 <!--[if lt IE 9]>
-    <script src="//html5shim.googlecode.com/svn/trunk/html5.JS"></script>
-    <![endif]-->
-    <!--    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>-->
+<script src="//html5shim.googlecode.com/svn/trunk/html5.JS"></script>
+<![endif]-->
+<!--    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>-->
 
 {% bootstrap_javascript_tag %}
 
 {%block headname%}所有预约{%endblock%}
 
 {%block content%}
-表内容
+
+<table class="table table-striped">
+    <tr>
+        <td>时间</td>
+        <td>课程名称</td>
+    </tr>
+    {% for timetable in timetables %}
+    <tr>
+        <td>{{timetable.time}}</td>
+        <td>{{timetable.courseName}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
 {%endblock%}
