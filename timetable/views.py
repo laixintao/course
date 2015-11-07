@@ -41,3 +41,12 @@ def publish(request):
 
 def index(request):
     return render_to_response('index.html')
+
+def all_timetables(request):
+    return render_to_response('all-timetables.html')
+
+def help(request):
+    return render_to_response('help.html')
+
+def mytime(request):
+    return render_to_response('mytime.html')
