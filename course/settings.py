@@ -127,6 +127,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'timetable',
     'bootstrap_toolkit',
+    'bootstrap3',
     'accouts',
 
     # Uncomment the next line to enable the admin:

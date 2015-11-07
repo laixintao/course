@@ -41,3 +41,6 @@ def publish(request):
 
 def index(request):
     return render_to_response('index.html')
+
+def help(request):
+    return render_to_response('help.html')
