@@ -4,7 +4,7 @@ from django.shortcuts import render,get_object_or_404
 from accouts.utils import course_render
 from django.template.context import RequestContext
 from forms import courseForm
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from models import QAtime
 import time
 from django.utils import six,timezone
@@ -33,10 +33,7 @@ def publish(request):
             localtime = timezone.now()
             new_time_table.pubTime = localtime
             new_time_table.save()
-            return HttpResponse(str(course_name)+'\n'+
-                                str(time)+'\n'+
-                                str(room)+'\n'+
-                                str(max_people))
+            return all_timetables(request)
         else:
             return course_render(request,'publish.html',RequestContext(request,{'form':form,}))
 
