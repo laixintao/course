@@ -33,7 +33,11 @@
                 <td>{{timetable.teacher}}</td>
                 <td>{{timetable.room}}</td>
                 <td>{{timetable.max_people}}</td>
-                <td><button class="btn btn-primary" id="{{timetable.id}}">预约</button> </td>
+                {% if timetable.is_ordered %}
+                <td><button class="btn btn-primary disabled" id="{{timetable.id}}">已约</button> </td>
+                {% else %}
+                <td><button class="btn btn-primary couldclick" id="{{timetable.id}}">预约</button> </td>
+                {% endif %}
             </tr>
             {% endfor %}
         </table>
@@ -48,12 +52,14 @@
     </div>
 </div></div>
 <script>
-    $('button').on("click",function(){
+    $('.couldclick').on("click",function(){
     console.log($(this).attr('id'));
     $('#id_tableid').attr('value',$(this).attr('id'));
     $('form').submit();
     }
     );
+
+
 
 </script>
 {%endblock%}

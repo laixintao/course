@@ -27,7 +27,7 @@ class Orders(models.Model):
                                    auto_now_add=True)
 
 class TextOrders(models.Model):
-    course= models.IntegerField(u'课程ID')
+    course= models.CharField(u'课程ID',max_length=100)
     student = models.CharField(u'预订人',max_length=128)
     # student = models.ForeignKey(User,related_name='order_student')
     pubTime = models.DateTimeField(u'确认时间',

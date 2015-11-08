@@ -9,6 +9,7 @@ from models import QAtime
 import time
 from django.utils import six,timezone
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from models import TextOrders
 
 @login_required
@@ -46,19 +47,45 @@ def all_timetables(request):
     if request.method == 'GET':
         timetables = QAtime.objects.all()
         form = OrderForm()
+        myorders = TextOrders.objects.filter(student=request.user)
+        for t in timetables:
+            t.is_ordered = False
+            for m in myorders:
+                if t.id == int(m.course):
+                    t.is_ordered = True
+                    break
         return course_render(request,'all-timetables.html',
-                             RequestContext(request,{'form':form,'timetables':timetables,})
+                             RequestContext(request,{'form':form,
+                                                     'timetables':timetables,
+                                                     'myorders':myorders,
+                                                     })
                              )
     else:
         form = OrderForm(request.POST)
         if form.is_valid():
             order = TextOrders()
-            course_id = int(form.cleaned_data['tableid'])
-            print course_id
-        return HttpResponseRedirect('/')
+            course_id = form.cleaned_data['tableid']
+            order.course = course_id
+            order.student = request.user
+            order.save()
+        return HttpResponseRedirect('/all-timetables')
 
 def help(request):
     return course_render(request,'help.html')
 
 def mytime(request):
-    return course_render(request,'mytime.html')
+    myorders = TextOrders.objects.filter(student=request.user)
+    course_list = []
+    for m in myorders:
+        course_list.append(m.course)
+    all_times = QAtime.objects.all()
+    mytimes = []
+    for e in all_times:
+        for id in course_list:
+            if e.id == int(id):
+                mytimes.append(e)
+                continue
+    return course_render(request,'mytime.html',
+                         RequestContext(request,{
+                             'timetables':mytimes,
+                         }))
