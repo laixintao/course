@@ -3,7 +3,16 @@ from django import forms
 from bootstrap_toolkit.widgets import BootstrapDateInput,BootstrapTextInput,BootstrapUneditableInput
 import time
 
-class courseForm(forms.Form):
+class OrderForm(forms.Form):
+    tableid = forms.IntegerField()
+
+    def clean(self):
+        if not self.is_valid():
+            raise forms.ValidationError(u"错误！")
+        else:
+            cleaned_data = super(OrderForm,self).clean()
+
+class CourseForm(forms.Form):
     course_name = forms.CharField(
         required = True,
         label=u"课程名称",
@@ -48,9 +57,8 @@ class courseForm(forms.Form):
         initial=100
     )
 
-
     def clean(self):
         if not self.is_valid():
             raise forms.ValidationError(u"需要填写更多信息！")
         else:
-            cleaned_data = super(courseForm,self).clean()
+            cleaned_data = super(CourseForm,self).clean()

@@ -3,23 +3,24 @@
 from django.shortcuts import render,get_object_or_404
 from accouts.utils import course_render
 from django.template.context import RequestContext
-from forms import courseForm
+from forms import CourseForm,OrderForm
 from django.http import HttpResponseRedirect
 from models import QAtime
 import time
 from django.utils import six,timezone
 from django.contrib.auth.decorators import login_required
+from models import TextOrders
 
 @login_required
 def publish(request):
     if request.method == 'GET':
-        form = courseForm()
+        form = CourseForm()
         return course_render(request,'publish.html',RequestContext(
             request,
             {'form':form,}
         ))
     else:
-        form = courseForm(request.POST)
+        form = CourseForm(request.POST)
         if form.is_valid():
             course_name = form.cleaned_data['course_name']
             time = form.cleaned_data['time']
@@ -40,11 +41,21 @@ def publish(request):
 def index(request):
     return course_render(request,'index.html')
 
+@login_required()
 def all_timetables(request):
-    timetables = QAtime.objects.all()
-    return course_render(request,'all-timetables.html',{
-        'timetables':timetables,
-    })
+    if request.method == 'GET':
+        timetables = QAtime.objects.all()
+        form = OrderForm()
+        return course_render(request,'all-timetables.html',
+                             RequestContext(request,{'form':form,'timetables':timetables,})
+                             )
+    else:
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            order = TextOrders()
+            course_id = int(form.cleaned_data['tableid'])
+            print course_id
+        return HttpResponseRedirect('/')
 
 def help(request):
     return course_render(request,'help.html')
