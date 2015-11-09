@@ -9,6 +9,7 @@ class QAtime(models.Model):
                                   max_length=128)
     time = models.DateTimeField(u'预约时间')
     max_people = models.IntegerField(u'限制人数')
+    order_people = models.IntegerField(u'已预约人数',default=0)
     teacher = models.CharField(u'教师',
                                max_length=128)
     room = models.CharField(u'教室',

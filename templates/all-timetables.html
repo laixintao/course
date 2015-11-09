@@ -36,7 +36,11 @@
                 {% if timetable.is_ordered %}
                 <td><button class="btn btn-primary disabled" id="{{timetable.id}}">已约</button> </td>
                 {% else %}
+                {%ifequal timetable.max_people timetable.order_people%}
+                <td><button class="btn btn-primary btn-danger" id="{{timetable.id}}">已满</button> </td>
+                {%else%}
                 <td><button class="btn btn-primary couldclick" id="{{timetable.id}}">预约</button> </td>
+                {%endifequal%}
                 {% endif %}
             </tr>
             {% endfor %}

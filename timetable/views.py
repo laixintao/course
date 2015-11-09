@@ -67,8 +67,11 @@ def all_timetables(request):
             order = TextOrders()
             course_id = form.cleaned_data['tableid']
             order.course = course_id
+            qa = QAtime.objects.get(id=int(course_id))
+            qa.order_people += 1
             order.student = request.user
             order.save()
+            qa.save()
         return HttpResponseRedirect('/all-timetables')
 
 def help(request):
@@ -94,12 +97,11 @@ def mytime(request):
 def mypublish(request):
     order = TextOrders.objects.filter(student=request.user)
     order_time = QAtime.objects.filter(teacher=request.user)
-    for i in order_time:
-        i.num = 0
-    for o in order:
-        for i in order_time:
-            if int(o.course) == int(i.id):
-                i.num += 1
+    for o in order_time:
+        o.student = []
+        order = TextOrders.objects.filter(course=o.id)
+        for e in order:
+            o.student.append(e.student)
     return course_render(request,'mypublish.html',
                          RequestContext(request,{
                              'timetables':order_time
