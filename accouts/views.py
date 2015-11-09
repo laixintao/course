@@ -29,7 +29,8 @@ def login(request):
             user = auth.authenticate(username=username,password=password)
             if user is not None and user.is_active:
                 auth.login(request,user)
-                return course_render(request,'index.html',RequestContext(request))
+                # return course_render(request,'index.html',RequestContext(request))
+                return HttpResponseRedirect('/all-timetables')
             else:
                 return course_render(request,'login.html',RequestContext(request,
                                                                       {'form':form,

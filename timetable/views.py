@@ -41,7 +41,10 @@ def publish(request):
             return course_render(request,'publish.html',RequestContext(request,{'form':form,}))
 
 def index(request):
-    return course_render(request,'index.html')
+    if request.user.is_authenticated:
+        return HttpResponseRedirect('/all-timetables')
+    else:
+        return course_render(request,'index.html')
 
 @login_required()
 def all_timetables(request):
@@ -75,7 +78,7 @@ def all_timetables(request):
         return HttpResponseRedirect('/all-timetables')
 
 def help(request):
-    return course_render(request,'help.html')
+    return course_render(request,'index.html')
 
 def mytime(request):
     myorders = TextOrders.objects.filter(student=request.user)

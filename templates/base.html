@@ -16,6 +16,7 @@
     {% bootstrap_javascript_tag %}
     {% block extra_head %}{% endblock %}
     <style type="text/css">
+
         body {padding:50px}
         .center {
         width: auto;
@@ -42,7 +43,7 @@
                 <li><a href="/all-timetables">所有预约</a></li>
                 {%if is_teacher %}
                 <li><a href="/mypublish">我的发布</a></li>
-                <li><a href="/publish">发布</a></li>
+                <li><a href="/publish">发布一条</a></li>
                 {%else%}
                 <li><a href="/mytime">我的预约</a></li>
                 {%endif%}
