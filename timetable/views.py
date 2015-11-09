@@ -32,6 +32,7 @@ def publish(request):
             new_time_table.time = time
             new_time_table.max_people = max_people
             new_time_table.room = room
+            new_time_table.teacher = request.user
             localtime = timezone.now()
             new_time_table.pubTime = localtime
             new_time_table.save()
@@ -88,4 +89,18 @@ def mytime(request):
     return course_render(request,'mytime.html',
                          RequestContext(request,{
                              'timetables':mytimes,
+                         }))
+
+def mypublish(request):
+    order = TextOrders.objects.filter(student=request.user)
+    order_time = QAtime.objects.filter(teacher=request.user)
+    for i in order_time:
+        i.num = 0
+    for o in order:
+        for i in order_time:
+            if int(o.course) == int(i.id):
+                i.num += 1
+    return course_render(request,'mypublish.html',
+                         RequestContext(request,{
+                             'timetables':order_time
                          }))

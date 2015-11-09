@@ -1,0 +1,38 @@
+{%extends "base.html"%}
+{% load bootstrap_toolkit %}
+{% load url from future %}
+{% bootstrap_stylesheet_tag %}
+{% bootstrap_stylesheet_tag "responsive" %}
+<!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.JS"></script>
+    <![endif]-->
+    <!--    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>-->
+
+{% bootstrap_javascript_tag %}
+
+{%block headname%}我的预约{%endblock%}
+
+{%block content%}
+<table class="table table-striped">
+            <tr class="success">
+                <td>ID</td>
+                <td>时间</td>
+                <td>课程名称</td>
+                <td>任课教师</td>
+                <td>地点</td>
+                <td>最大人数</td>
+                <td>已预约人数</td>
+            </tr>
+            {% for timetable in timetables %}
+            <tr>
+                <td>{{timetable.id}}</td>
+                <td>{{timetable.time}}</td>
+                <td>{{timetable.courseName}}</td>
+                <td>{{timetable.teacher}}</td>
+                <td>{{timetable.room}}</td>
+                <td>{{timetable.max_people}}</td>
+                <td>{{timetable.num}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+{%endblock%}

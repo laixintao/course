@@ -30,4 +30,5 @@ urlpatterns = patterns('',
     url(r'all-timetables/$','timetable.views.all_timetables'),
     url(r'help/$','timetable.views.help'),
     url(r'mytime/$','timetable.views.mytime'),
+    url(r'^mypublish','timetable.views.mypublish'),
 )
