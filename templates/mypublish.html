@@ -13,33 +13,28 @@
 {%block headname%}我的预约{%endblock%}
 
 {%block content%}
-<table class="table table-striped">
+<div class="span8">
     {% for timetable in timetables %}
-    <dl class="dl-horizontal">
-        <dt>ID</dt><dd>{{timetable.id}}</dd>
-        <dt>时间</dt><dd>{{timetable.time}}</dd>
-        <dt>课程名称</dt><dd>{{timetable.courseName}}</dd>
-        <dt>任课教师</dt><dd>{{timetable.teacher}}</dd>
-        <dt>地点</dt><dd>{{timetable.room}}</dd>
-        <dt>最大人数</dt><dd>{{timetable.max_people}}</dd>
-        <dt>已预约人数</dt><dd>{{timetable.order_people}}</dd>
-        <dt>预约学生</dt>
-        <dd>
-            {% for i in timetable.student%}
-            {{i}}
-            {%endfor%}
-    </dd>
+    <div class="well">
+        <dl class="dl-horizontal">
+            <dt>ID</dt><dd>{{timetable.id}}</dd>
+            <dt>时间</dt><dd>{{timetable.time}}</dd>
+            <dt>课程名称</dt><dd>{{timetable.courseName}}</dd>
+            <dt>任课教师</dt><dd>{{timetable.teacher}}</dd>
+            <dt>地点</dt><dd>{{timetable.room}}</dd>
+            <dt>最大人数</dt><dd>{{timetable.max_people}}</dd>
+            <dt>已预约人数</dt><dd>{{timetable.order_people}}</dd>
+            <dt>预约学生</dt>
+            <dd>
+                {% for i in timetable.student%}
+                {{i}}
+                {% endfor %}
+            </dd>
+        </dl>
+    </div>
+    {%endfor%}
+</div>
 
 
 
-
-
-
-
-
-
-
-    </dl>
-    {% endfor %}
-</table>
 {%endblock%}

@@ -23,6 +23,7 @@
                 <td>任课教师</td>
                 <td>地点</td>
                 <td>预约人数</td>
+                <td>已预约人数</td>
                 <td></td>
             </tr>
             {% for timetable in timetables %}
@@ -33,6 +34,7 @@
                 <td>{{timetable.teacher}}</td>
                 <td>{{timetable.room}}</td>
                 <td>{{timetable.max_people}}</td>
+                <td>{{timetable.order_people}}</td>
                 {% if timetable.is_ordered %}
                 <td><button class="btn btn-primary disabled" id="{{timetable.id}}">已约</button> </td>
                 {% else %}
