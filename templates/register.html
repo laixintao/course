@@ -1,20 +1,10 @@
 {%extends "base.html"%}
 {% load bootstrap_toolkit %}
-{% load url from future %}
-{% bootstrap_stylesheet_tag %}
-{% bootstrap_stylesheet_tag "responsive" %}
-<!--[if lt IE 9]>
-    <script src="//html5shim.googlecode.com/svn/trunk/html5.JS"></script>
-    <![endif]-->
-    <!--    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>-->
-
-{% bootstrap_javascript_tag %}
 
 {%block headname%}注册{%endblock%}
 
 {%block content%}
 
-    <div class="well">
         <h1>欢迎新朋友！</h1>
         <p></p>
         {% if password_is_wrong %}
@@ -32,6 +22,5 @@
                 <a href="/login/"><input type="button" value="已有帐号？" class="btn btn-success"></a>
             </p>
         </form>
-    </div>
 
 {%endblock%}
