@@ -65,26 +65,6 @@ class RegisterForm(forms.Form):
             )
     )
 
-    jobnum = forms.IntegerField(
-        required=False,
-        label="工号",
-        widget=forms.NumberInput(
-            attrs={
-                'placeholder':u'6位工号'
-            }
-        )
-    )
-
-    email = forms.EmailField(
-        required=False,
-        label='E-mail',
-        widget=forms.EmailInput(
-            attrs={
-                'placeholder':u'请输入合法的邮件地址'
-            }
-        )
-    )
-
     def clean(self):
         if not self.is_valid():
             raise forms.ValidationError(u"用户名和密码为必填项")
