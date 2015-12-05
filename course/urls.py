@@ -26,6 +26,4 @@ urlpatterns = patterns('',
     url(r'logout/$','accouts.views.logout'),
     url(r'register/$','accouts.views.register'),
     url(r'^$','store.views.index'),
-    url(r'help/$','store.views.help'),
-
 )
