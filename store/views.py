@@ -49,7 +49,7 @@ def outcome(request):
         if form.is_valid():
             item = request.POST.get('account_type','')
             num = int(request.POST.get('num',''))
-            income = Income()
+            income = Outcome()
             income.item = item
             income.num = num
             income.save()
