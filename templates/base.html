@@ -19,30 +19,32 @@
     <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<div id="bg"></div>
+<div id="in-center">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-2">
+            <div class="sider-bar text-center">
+                <ul class="nav nav-list">
+                    <li class="nav-header"><h3>仓库管理系统</h3></li>
+                    <li ><a href="/static/index.html"><i class="icon-home"></i> 首页</a></li>
+                    <li class="my-income"><a href="/income"><i class=" icon-circle-arrow-right"></i> 入库</a></li>
+                    <li class="my-outcome"><a href="/outcome"><i class=" icon-circle-arrow-left"></i> 出库</a></li>
+                    <li class="my-check"><a href="/item-check"><i class="icon-search"></i> 查询</a></li>
+                    <li class="divider"></li>
+                    <li class="my-login"><a href="/login"><i class="icon-user"></i> 登入</a></li>
+                    <li class="my-logout"><a href="/logout"><i class="icon-cog"></i> 登出</a></li>
 
-<div class="row">
-    <div class="col-md-2"></div>
-	<div class="col-md-2">
-        <div class="sider-bar text-center">
-		<ul class="nav nav-list">
-			<li class="nav-header"><h3>仓库管理系统</h3></li>
-			<li ><a href="#"><i class="icon-home"></i> 首页</a></li>
-			<li class="my-income"><a href="/income"><i class=" icon-circle-arrow-right"></i> 入库</a></li>
-			<li class="my-outcome"><a href="/outcome"><i class=" icon-circle-arrow-left"></i> 出库</a></li>
-			<li class="my-check"><a href="/item-check"><i class="icon-search"></i> 查询</a></li>
-            <li class="divider"></li>
-			<li class="my-login"><a href="/login"><i class="icon-user"></i> 登入</a></li>
-			<li class="my-logout"><a href="/logout"><i class="icon-cog"></i> 登出</a></li>
-
-			<li class="my-register"><a href="/register"><i class="icon-flag"></i> 注册</a></li>
-		</ul>
+                    <li class="my-register"><a href="/register"><i class="icon-flag"></i> 注册</a></li>
+                </ul>
             </div>
-	</div>
-    <div class="col-md-6">
-        <div class="well"> {%block content%}
-{%endblock%}</div>
         </div>
-    <div class="col-md-2"></div>
+        <div class="col-md-6">
+            <div class="well"> {%block content%}
+                {%endblock%}</div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
 </div>
 </body>
 </html>

@@ -20,7 +20,7 @@ def index(request):
 @login_required()
 def income(request):
     if request.method == 'GET':
-        form = IncomeForm()
+        form = IncomeForm( )
         return render(request,'income.html',RequestContext(request,{'form':form}))
     else:
         form = IncomeForm(request.POST)

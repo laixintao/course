@@ -102,7 +102,7 @@ class OutcomeForm(forms.Form):
         if not self.is_valid():
             raise forms.ValidationError(u"需要填写更多信息！")
         else:
-            cleaned_data = super(IncomeForm,self).clean()
+            cleaned_data = super(OutcomeForm,self).clean()
 
 
 if __name__ == "__main__":
