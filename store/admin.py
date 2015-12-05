@@ -1,28 +1,22 @@
 __author__ = 'laixintao'
 
 from django.contrib import admin
-from .models import QAtime
-from .models import Orders,TextOrders
+from .models import Item,Income,Outcome
 
-class QAtimeAdmin(admin.ModelAdmin):
-    list_display = ('courseName',
-                    'room',
-                    'teacher',
-                    'pubTime',)
+class ItemAdmin(admin.ModelAdmin):
+    list_display = ('name',
+                    'num')
 
-class OrdersAdmin(admin.ModelAdmin):
+class IncomeAdmin(admin.ModelAdmin):
     list_display = (
-        'student',
-        'pubTime',
-        'course'
-                    )
+        'item',
+        'num'       )
 
-class TextOrdersAdmin(admin.ModelAdmin):
+class OutcomeAdmin(admin.ModelAdmin):
     list_display = (
-        'course',
-        'student',
-        'pubTime'
+        'num',
+        'item'
     )
-admin.site.register(Orders,OrdersAdmin)
-admin.site.register(QAtime,QAtimeAdmin)
-admin.site.register(TextOrders,TextOrdersAdmin)
+admin.site.register(Item,ItemAdmin)
+admin.site.register(Income,IncomeAdmin)
+admin.site.register(Outcome,OutcomeAdmin)

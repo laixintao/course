@@ -30,7 +30,7 @@ def login(request):
             if user is not None and user.is_active:
                 auth.login(request,user)
                 # return course_render(request,'index.html',RequestContext(request))
-                return HttpResponseRedirect('/all-timetables')
+                return HttpResponseRedirect('/')
             else:
                 return course_render(request,'login.html',RequestContext(request,
                                                                       {'form':form,

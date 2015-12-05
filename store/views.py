@@ -5,12 +5,10 @@ from accouts.utils import course_render
 from django.template.context import RequestContext
 from forms import CourseForm,OrderForm
 from django.http import HttpResponseRedirect
-from models import QAtime
 import time
 from django.utils import six,timezone
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from models import TextOrders
 
 def index(request):
     return course_render(request,'index.html')
