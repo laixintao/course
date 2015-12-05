@@ -19,7 +19,6 @@ def index(request):
 
 @login_required()
 def income(request):
-    get_items()
     if request.method == 'GET':
         form = IncomeForm()
         return render(request,'income.html',RequestContext(request,{'form':form}))
@@ -44,16 +43,22 @@ def income(request):
 def outcome(request):
     if request.method == 'GET':
         form = IncomeForm()
-        return course_render(request,'income.html',RequestContext(request,{'form':form,}))
+        return render(request,'outcome.html',RequestContext(request,{'form':form}))
     else:
         form = IncomeForm(request.POST)
         if form.is_valid():
-            name = request.POST.get('name','')
-            item = Item(name=name,num=0)
-            item.save()
-            return course_render(request,'income.html')
+            item = request.POST.get('account_type','')
+            num = int(request.POST.get('num',''))
+            income = Income()
+            income.item = item
+            income.num = num
+            income.save()
+            add = Item.objects.filter(name=item)[0]
+            add.num-=num
+            add.save()
+            return course_render(request,'outcome_success.html')
         else:
-            return course_render(request,'income.html',RequestContext(request,{'form':form,}))
+            return course_render(request,'outcome.html')
 
 
 @login_required()
@@ -71,4 +76,6 @@ def newitem(request):
             return course_render(request,'add_success.html')
         else:
             return course_render(request,'newitem.html',RequestContext(request,{'form':form,}))
+
+
 

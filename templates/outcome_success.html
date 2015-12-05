@@ -10,7 +10,7 @@
 
 {% bootstrap_javascript_tag %}
 
-{%block headname%}入库成功{%endblock%}
+{%block headname%}出库成功{%endblock%}
 
 {%block content%}
 
@@ -30,13 +30,13 @@ setTimeout("delayURL('" + url + "')", 1000);
 }
 </script>
 <h2>
-    入库成功...
+    出库成功...
 </h2>
 <h2>    <span id="time">3</span>
 秒钟之后自动跳转，如果不跳转，请点击下面链接
-<a href="/income">入库页面</a>
+<a href="/outcome">出库页面</a>
     </h2>
 <script type="text/javascript">
-delayURL("/income");
+delayURL("/outcome");
 </script>
 {%endblock%}
