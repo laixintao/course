@@ -60,34 +60,7 @@ class IncomeForm(forms.Form):
         else:
             cleaned_data = super(IncomeForm,self).clean()
 
-class IncomeForm2(forms.Form):
-    account_type=forms.ChoiceField(
-        label=u'商品种类',
-        required=True,
-        choices=get_items(),
-        widget=forms.RadioSelect())
 
-    # item = forms.RadioChoiceInput(
-    #     required=True,
-    #     label=u'货物名称',
-    #     widget=forms.RadioSelect(
-    #         choices=('none','one',)
-    #     )
-    # )
-
-    num = forms.IntegerField(
-        required=True,
-        label=u'入库数量',
-        widget=forms.TextInput(
-
-        )
-    )
-
-    def clean(self):
-        if not self.is_valid():
-            raise forms.ValidationError(u"需要填写更多信息！")
-        else:
-            cleaned_data = super(IncomeForm2,self).clean()
 
 if __name__ == "__main__":
     get_items()
