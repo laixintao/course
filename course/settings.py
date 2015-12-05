@@ -126,7 +126,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'timetable',
+    'store',
     'bootstrap_toolkit',
     'accouts',
 
