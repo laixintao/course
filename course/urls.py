@@ -26,4 +26,9 @@ urlpatterns = patterns('',
     url(r'logout/$','accouts.views.logout'),
     url(r'register/$','accouts.views.register'),
     url(r'^$','store.views.index'),
+    url(r'newitem/$','store.views.newitem'),
+    url(r'income/$','store.views.income'),
+    url(r'income2/$','store.views.income2'),
+    url(r'outcome/$','store.views.outcome'),
+
 )

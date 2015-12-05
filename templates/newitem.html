@@ -1,0 +1,31 @@
+{%extends "base.html"%}
+{% load bootstrap_toolkit %}
+{% load url from future %}
+{% bootstrap_stylesheet_tag %}
+{% bootstrap_stylesheet_tag "responsive" %}
+<!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.JS"></script>
+    <![endif]-->
+    <!--    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>-->
+
+{% bootstrap_javascript_tag %}
+{%block headname%}添加种类{%endblock%}
+
+{%block content%}
+        <h1>添加商品信息</h1>
+        <p></p>
+        {% if password_is_wrong %}
+        <div class="alert alert-error">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <h4>错误!</h4>表单有误错误
+        </div>
+    {% endif %}
+        <form class="form-horizontal" action="" method="post">
+            {% csrf_token %}
+            {{ form|as_bootstrap:"horizontal" }}
+            <p class="form-actions">
+                <input type="submit" value="确认" class="btn btn-primary">
+                <a href="/"><input type="button" value="放弃" class="btn btn-danger"></a>
+            </p>
+        </form>
+{%endblock%}

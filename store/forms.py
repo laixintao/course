@@ -2,63 +2,92 @@
 from django import forms
 from bootstrap_toolkit.widgets import BootstrapDateInput,BootstrapTextInput,BootstrapUneditableInput
 import time
+from models import Item
 
-class OrderForm(forms.Form):
-    tableid = forms.IntegerField()
+def get_items():
+    items = Item.objects.all()
+    result = []
+    for i in items:
+        result.append((str(i),str(i)))
+        print i
+    print result
+    return result
 
-    def clean(self):
-        if not self.is_valid():
-            raise forms.ValidationError(u"错误！")
-        else:
-            cleaned_data = super(OrderForm,self).clean()
-
-class CourseForm(forms.Form):
-    course_name = forms.CharField(
+class NewItemForm(forms.Form):
+    name = forms.CharField(
         required = True,
-        label=u"课程名称",
-        error_messages={'required':'请输入课程名称'},
+        label=u"货物名称",
+        error_messages={'required':'请输入货物名称'},
         widget=forms.TextInput(
             attrs={
-                'placeholder':u"课程名称",
+                'placeholder':u"货物名称",
             }
         )
-    )
-    time = forms.DateTimeField(
-        required=True,
-        label=u"预约时间",
-        error_messages={'required':'请输入可预约时间'},
-        widget=forms.DateTimeInput(
-            format='%Y-%m-%d %H:%M',
-            attrs={
-                'placeholder':u'年-月-日 时：分'
-            }
-        ),
-        initial=time.strftime('%Y-%m-%d %H:%M',time.localtime(time.time()))
-    )
-    room = forms.CharField(
-        required=True,
-        label=u"地点",
-        error_messages={'required':"请输入地点"},
-        widget=forms.TextInput(
-            attrs={
-                'placeholder':u'教学楼，教室号等'
-            }
-        )
-    )
-    max_people = forms.CharField(
-        required=False,
-        label=u'最大人数',
-        widget=forms.NumberInput(
-            attrs={
-                'placeholder':u' 最大人数',
-                'default':100,
-            }
-        ),
-        initial=100
     )
 
     def clean(self):
         if not self.is_valid():
             raise forms.ValidationError(u"需要填写更多信息！")
         else:
-            cleaned_data = super(CourseForm,self).clean()
+            cleaned_data = super(NewItemForm,self).clean()
+
+class IncomeForm(forms.Form):
+    account_type=forms.ChoiceField(
+        label=u'商品种类',
+        required=True,
+        choices=get_items(),
+        widget=forms.RadioSelect())
+
+    # item = forms.RadioChoiceInput(
+    #     required=True,
+    #     label=u'货物名称',
+    #     widget=forms.RadioSelect(
+    #         choices=('none','one',)
+    #     )
+    # )
+
+    num = forms.IntegerField(
+        required=True,
+        label=u'入库数量',
+        widget=forms.TextInput(
+
+        )
+    )
+
+    def clean(self):
+        if not self.is_valid():
+            raise forms.ValidationError(u"需要填写更多信息！")
+        else:
+            cleaned_data = super(IncomeForm,self).clean()
+
+class IncomeForm2(forms.Form):
+    account_type=forms.ChoiceField(
+        label=u'商品种类',
+        required=True,
+        choices=get_items(),
+        widget=forms.RadioSelect())
+
+    # item = forms.RadioChoiceInput(
+    #     required=True,
+    #     label=u'货物名称',
+    #     widget=forms.RadioSelect(
+    #         choices=('none','one',)
+    #     )
+    # )
+
+    num = forms.IntegerField(
+        required=True,
+        label=u'入库数量',
+        widget=forms.TextInput(
+
+        )
+    )
+
+    def clean(self):
+        if not self.is_valid():
+            raise forms.ValidationError(u"需要填写更多信息！")
+        else:
+            cleaned_data = super(IncomeForm2,self).clean()
+
+if __name__ == "__main__":
+    get_items()
