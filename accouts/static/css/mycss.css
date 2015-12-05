@@ -1,0 +1,13 @@
+.sider-bar{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 10px;
+    background-color:#feeeed;
+    padding-left: 10px;
+    padding-right: 10px;
+    overflow: hidden;
+}
+
+body{
+    padding-top: 50px;
+}

@@ -41,7 +41,7 @@ def login(request):
 @login_required
 def logout(request):
     auth.logout(request)
-    return HttpResponseRedirect("/accounts/login/")
+    return course_render(request,"logout.html")
 
 def register(request):
     if request.method == 'GET':
@@ -54,6 +54,5 @@ def register(request):
             new_psw = form.cleaned_data['password']
             user = User.objects.create_user(username=new_name,
                                             password=new_psw)
-            user.groups = [1,] #默认是Student学生分组
             user.save()
             return course_render(request,'register_success.html')
