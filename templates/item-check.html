@@ -1,10 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{%extends "base.html"%}
+{% load bootstrap_toolkit %}
+{% load url from future %}
+{% bootstrap_stylesheet_tag %}
+{% bootstrap_stylesheet_tag "responsive" %}
+<!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.JS"></script>
+    <![endif]-->
+    <!--    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>-->
 
-</body>
-</html>
+{% bootstrap_javascript_tag %}
+{%block headname%}入库{%endblock%}
+
+{%block content%}
+ <table class="table table-striped">
+            <tr class="success">
+                <td>编号</td>
+                <td>名称</td>
+                <td>价格</td>
+                <td>库存</td>
+                <td>最后出入库时间</td>
+            </tr>
+            {% for item in items %}
+            <tr>
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.price}}</td>
+                <td>{{item.num}}</td>
+                <td>{{item.time}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+<script>
+    $("li.my-check").addClass("active");
+    $("i.icon-search").addClass("icon-white");
+</script>
+{%endblock%}
+
+
+
+
+

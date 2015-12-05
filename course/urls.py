@@ -29,5 +29,6 @@ urlpatterns = patterns('',
     url(r'newitem/$','store.views.newitem'),
     url(r'income/$','store.views.income'),
     url(r'outcome/$','store.views.outcome'),
+    url(r'item-check/$','store.views.item_check'),
 
 )

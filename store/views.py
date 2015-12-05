@@ -3,7 +3,7 @@
 from django.shortcuts import render,get_object_or_404
 from accouts.utils import course_render
 from django.template.context import RequestContext
-from forms import NewItemForm,IncomeForm
+from forms import NewItemForm,IncomeForm,OutcomeForm
 from django.http import HttpResponseRedirect
 import time
 from django.utils import six,timezone
@@ -42,10 +42,10 @@ def income(request):
 @login_required()
 def outcome(request):
     if request.method == 'GET':
-        form = IncomeForm()
+        form = OutcomeForm()
         return render(request,'outcome.html',RequestContext(request,{'form':form}))
     else:
-        form = IncomeForm(request.POST)
+        form = OutcomeForm(request.POST)
         if form.is_valid():
             item = request.POST.get('account_type','')
             num = int(request.POST.get('num',''))
@@ -70,12 +70,28 @@ def newitem(request):
         form = NewItemForm(request.POST)
         if form.is_valid():
             name = request.POST.get('name','')
-            item = Item(name=name,
-                                            num=0)
+            price = request.POST.get('price','')
+            iid = request.POST.get('iid','')
+            item = Item(name=name,num=0,price=price,iid = iid)
             item.save()
             return course_render(request,'add_success.html')
         else:
             return course_render(request,'newitem.html',RequestContext(request,{'form':form,}))
 
+class myitem:
+    pass
 
-
+@login_required()
+def item_check(request):
+    module_items = Item.objects.all()
+    items = []
+    for i in module_items:
+        e=myitem()
+        e.id = i.iid
+        e.name = i.name
+        e.price = i.price
+        e.time = i.time
+        e.num = i.num
+        items.append(e)
+        e=None
+    return course_render(request,'item-check.html',RequestContext(request,{'items':items,}))
