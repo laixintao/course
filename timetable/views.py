@@ -10,16 +10,12 @@ import time
 from django.utils import six,timezone
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from models import TextOrders,TeachersClass
-from django import forms
-
-
+from models import TextOrders
 
 @login_required
 def publish(request):
     if request.method == 'GET':
         form = CourseForm()
-
         return course_render(request,'publish.html',RequestContext(
             request,
             {'form':form,}

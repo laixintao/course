@@ -33,7 +33,3 @@ class TextOrders(models.Model):
     # student = models.ForeignKey(User,related_name='order_student')
     pubTime = models.DateTimeField(u'确认时间',
                                    auto_now_add=True)
-
-class TeachersClass(models.Model):
-    name = models.CharField(u'教师',max_length=100)
-    courseName = models.CharField(u'名称',max_length=128)
