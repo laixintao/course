@@ -2,6 +2,15 @@
 from django import forms
 from bootstrap_toolkit.widgets import BootstrapDateInput,BootstrapTextInput,BootstrapUneditableInput
 import time
+from models import TeachersClass
+
+
+def get_classes():
+    result = []
+    course = TeachersClass.objects.filter(name = 'laixintao')
+    for i in course:
+        result.append((str(i.courseName),str(i.courseName)))
+    return result
 
 class OrderForm(forms.Form):
     tableid = forms.IntegerField()
@@ -13,15 +22,12 @@ class OrderForm(forms.Form):
             cleaned_data = super(OrderForm,self).clean()
 
 class CourseForm(forms.Form):
-    course_name = forms.CharField(
+    course_name = forms.ChoiceField(
         required = True,
         label=u"课程名称",
-        error_messages={'required':'请输入课程名称'},
-        widget=forms.TextInput(
-            attrs={
-                'placeholder':u"课程名称",
-            }
-        )
+        error_messages={'required':'请选择课程名称'},
+        widget=forms.RadioSelect(),
+        choices=get_classes()
     )
     time = forms.DateTimeField(
         required=True,
